@@ -30,6 +30,9 @@
             # Nix
             programs.nixfmt.enable = true;
 
+            # C
+            programs.clang-format.enable = true;
+
             # Zig
             programs.zig.enable = true;
             settings.formatter.zig.command = lib.getExe pkgs.zig_0_15;
