@@ -1,7 +1,10 @@
 #include <raylib.h>
 
+const int screenWidth = 800;
+const int screenHeight = 450;
+
 int main(void) {
-  InitWindow(800, 450, "raylib [core] example - basic window");
+  InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
   while (!WindowShouldClose()) {
     BeginDrawing();
