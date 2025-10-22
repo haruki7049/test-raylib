@@ -1,14 +1,12 @@
-{
-  pkgs ? import <nixpkgs> { },
-}:
-
-pkgs.mkShell rec {
-  nativeBuildInputs = [
-    pkgs.zig
-    pkgs.pkg-config
-  ];
-
-  buildInputs = [
-    pkgs.raylib
-  ];
-}
+(import (
+  let
+    lock = builtins.fromJSON (builtins.readFile ./flake.lock);
+    nodeName = lock.nodes.root.inputs.flake-compat;
+  in
+  fetchTarball {
+    url =
+      lock.nodes.${nodeName}.locked.url
+        or "https://github.com/edolstra/flake-compat/archive/${lock.nodes.${nodeName}.locked.rev}.tar.gz";
+    sha256 = lock.nodes.${nodeName}.locked.narHash;
+  }
+) { src = ./.; }).shellNix
